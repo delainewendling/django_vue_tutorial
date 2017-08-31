@@ -1,1 +1,2 @@
-# django_vue_test_project
+# django_vue_tutorial
+
