@@ -11,7 +11,7 @@
         <new-question-form></new-question-form>
         <hr>
         <h2> Edit Current Questions </h2>
-        <question v-for="question in latest_question_list" :question="question" :showEditControls="true"></question>
+        <question v-for="question in latest_question_list" :question="question" :key="question.id" :showEditControls="true"></question>
     </div>
 </template>
 
