@@ -18,7 +18,7 @@
               <ul class="nav navbar-nav">
                 <li v-bind:class="{active: route === '/home'}" @click="changeActive('/home')"><a href="#/home">Home <span class="sr-only">(current)</span></a></li>
                 <li v-bind:class="{active: route === '/polls'}" @click="changeActive('/polls')"><a href="#/polls" v-if="isAuthenticated">Polls</a></li>
-                <li v-bind:class="{active: route === '/new_question'}" @click="changeActive('/new_question')" v-if="isAuthenticated"><a href="#/new_question">New Question</a></li>
+                <li v-bind:class="{active: route === '/manage_questions'}" @click="changeActive('/manage_questions')" v-if="isAuthenticated"><a href="#/manage_questions">Manage Questions</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="pull-right" v-bind:class="{active: route === '/login'}" @click="changeActive('/login')" v-if="!isAuthenticated"><a href="#/login">Login</a></li>

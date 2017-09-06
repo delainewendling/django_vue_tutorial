@@ -10,7 +10,6 @@ router.register(r'choices', viewModels.ChoiceViewSet)
 router.register(r'accounts', viewModels.UserViewSet)
 urlpatterns =[
     url(r'^', include(router.urls)),
-    url(r'^(?P<question_id>[0-9]+)/question_choices/$', viewModels.question_choices, name="question_choices"),
     url(r'^api-token-auth/', views.obtain_auth_token)
 ]
 

@@ -1,21 +1,12 @@
-<style>
-    .question-name {
-        width: 300px;
-    }
-
-</style>
-
 <template>
-    <div>
-        <div class="question-form">
-            <input class="question-name" placeholder="Question Text" v-model="question_text">
-            <div class="btn btn-default" @click="saveQuestion()"> Save Question </div>
-        </div>
+    <div class="question-form">
+        <input class="question-name" placeholder="Question Text" v-model="question_text">
+        <div class="btn btn-default" @click="saveQuestion()"> Save Question </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 export default {
     data(){
         return {

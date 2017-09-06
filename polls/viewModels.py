@@ -17,6 +17,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
+from rest_framework import status
+from rest_framework.decorators import api_view
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
@@ -57,15 +59,13 @@ class ChoiceViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
 
     def retrieve(self, request, pk=None):
-        queryset = Choice.objects.filter(question__in=Question.objects.filter(id=pk))
+        try:
+            question = Question.objects.get(id=pk)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        queryset = Choice.objects.filter(question=question)
         serializer = ChoiceSerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data)
-
-def question_choices(request, question_id):
-    question_choices = Choice.objects.filter(question=question_id)
-
-    serializer = ChoiceSerializer(question_choices, many=True)
-    return Response(serializer.data)
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

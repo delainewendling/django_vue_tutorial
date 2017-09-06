@@ -32,9 +32,9 @@ export default {
 }
 </script>
 
-//<p><strong v-if="error_message">{{ error_message }}</strong></p>
+<!--//<p><strong v-if="error_message">{{ error_message }}</strong></p>-->
 
-//        <div v-for="choice in question.choice_set.all">
-//            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-//            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-//        </div>
+<!--//        <div v-for="choice in question.choice_set.all">-->
+<!--//            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />-->
+<!--//            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />-->
+<!--//        </div>-->
