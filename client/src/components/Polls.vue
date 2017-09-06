@@ -30,6 +30,7 @@
                     return {
                         id: question.id,
                         expanded: false,
+                        visible: true,
                         question_text: question.question_text
                     }
                 });

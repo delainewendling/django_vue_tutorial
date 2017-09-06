@@ -1,16 +1,18 @@
 <template>
-    <div>
+    <div v-if="question.visible">
         <span v-if="!question.editing">{{ question.question_text }}</span>
         <input v-model="question.question_text" v-if="question.editing">
-        <i class="fa fa-caret-down" v-if="!question.expanded" @click="changeArrowDirection(question)" aria-hidden="true"></i>
-        <i class="fa fa-caret-up" v-if="question.expanded" @click="changeArrowDirection(question)" aria-hidden="true"></i>
+        <span v-if="!showEditControls">
+            <i class="fa fa-caret-down" v-if="!question.expanded" @click="changeArrowDirection(question)" aria-hidden="true"></i>
+            <i class="fa fa-caret-up" v-if="question.expanded" @click="changeArrowDirection(question)" aria-hidden="true"></i>
+        </span>
         <span v-if="showEditControls">
             <i class="fa fa-trash pull-right" @click="deleteQuestion(question)" aria-hidden="true"></i>
             <i class="fa fa-pencil pull-right" @click="editQuestion(question)" v-if="!question.editing" aria-hidden="true"></i>
             <i class="fa fa-save pull-right" @click="saveQuestionEdits(question)" v-if="question.editing" aria-hidden="true"></i>
         </span>
         <hr>
-        <poll-detail :question="question"></poll-detail>
+        <poll-detail :question="question" v-if="!showEditControls"></poll-detail>
     </div>
 </template>
 

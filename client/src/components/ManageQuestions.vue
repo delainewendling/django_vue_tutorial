@@ -47,7 +47,7 @@ export default {
     methods: {
         addNewQuestion(response){
             const data = response.data;
-            this.latest_question_list.push({
+            this.latest_question_list.unshift({
                 id: data.id,
                 expanded: false,
                 editing: false,
