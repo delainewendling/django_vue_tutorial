@@ -18,8 +18,6 @@
 import axios from 'axios';
 import PollDetail from './PollDetail.vue';
 export default {
-    data(){
-    },
     props: ['question', 'showEditControls'],
     components: {PollDetail},
     methods: {

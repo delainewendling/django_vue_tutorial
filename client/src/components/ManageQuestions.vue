@@ -8,7 +8,7 @@
 <template>
     <div>
         <h2> Add a New Question </h2>
-        <new-question-form></new-question-form>
+        <new-question-form @add="addNewQuestion"></new-question-form>
         <hr>
         <h2> Edit Current Questions </h2>
         <question v-for="question in latest_question_list" :question="question" :key="question.id" :showEditControls="true"></question>
@@ -44,5 +44,18 @@ export default {
     destroyed() {
         this.$destroy();
     },
+    methods: {
+        addNewQuestion(response){
+            const data = response.data;
+            this.latest_question_list.push({
+                id: data.id,
+                expanded: false,
+                editing: false,
+                visible: true,
+                question_text: data.question_text
+            });
+
+        }
+    }
 }
 </script>
