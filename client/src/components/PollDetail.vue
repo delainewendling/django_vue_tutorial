@@ -24,7 +24,6 @@ export default {
     created: function() {
         axios.get('http://localhost:8000/polls/choices/'+this.question.id)
         .then((response) => {
-            console.log(response);
             this.choices = response.data
         })
         .catch((err) => console.log(err));
