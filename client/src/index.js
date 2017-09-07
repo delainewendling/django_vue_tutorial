@@ -25,9 +25,6 @@ export const router = new VueRouter({
   routes
 });
 
-Vue.component('navbar', {
-    template: Navbar
-})
 
 const app = new Vue({
   el: '#app',

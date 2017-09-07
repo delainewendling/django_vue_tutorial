@@ -20,6 +20,7 @@ export default {
             })
             .then((response) => {
                 this.question_text = '';
+                this.$emit('add', response);
             })
             .catch((err) => console.log(err));
         }

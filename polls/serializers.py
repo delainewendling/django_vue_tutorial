@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Question, Choice
+from .models import Question, Choice
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):

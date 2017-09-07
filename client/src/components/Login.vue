@@ -24,8 +24,6 @@
                     password: this.password
                 })
                 .then((response) => {
-                    console.log(response);
-                    console.log(this.$router);
                     this.$store.commit('setUser', response.token)
                     this.$router.push('/home');
                 })
