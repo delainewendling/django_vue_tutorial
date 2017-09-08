@@ -1,8 +1,5 @@
-//    Do things here to get the questions from the database
-<style>
-    .fa {
-        cursor: pointer;
-    }
+<style lang="sass">
+    @import '../sass/partials/questions.sass';
 </style>
 
 <template>

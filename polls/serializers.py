@@ -22,14 +22,14 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
 
-class QuestionSerializer(serializers.HyperlinkedModelSerializer):
-    # owner = serializers.ReadOnlyField(source='owner.username')
-    class Meta:
-        model = Question
-        fields = ('id', 'question_text', 'pub_date')
-
 class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
-    question = serializers.HyperlinkedRelatedField(many=False, view_name='choice-question-detail', read_only=True)
     class Meta:
         model = Choice
         fields = ('id', 'question', 'choice_text', 'votes')
+
+class QuestionSerializer(serializers.HyperlinkedModelSerializer):
+    # owner = serializers.ReadOnlyField(source='owner.username')
+    choices = ChoiceSerializer(many=True)
+    class Meta:
+        model = Question
+        fields = ('id', 'question_text', 'pub_date', 'choices')

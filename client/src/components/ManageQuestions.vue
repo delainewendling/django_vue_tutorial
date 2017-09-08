@@ -1,13 +1,10 @@
-<style>
-    .question-name {
-        width: 300px;
-    }
-
+<style lang="sass">
+    @import '../sass/partials/questions.sass';
 </style>
 
 <template>
     <div>
-        <h2> Add a New Question </h2>
+        <h2 class="test-heading"> Add a New Question </h2>
         <new-question-form @add="addNewQuestion"></new-question-form>
         <hr>
         <h2> Edit Current Questions </h2>

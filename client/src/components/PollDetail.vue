@@ -1,9 +1,9 @@
 <template>
     <div v-if="question.expanded">
         <form method="post">
-        <div v-for="(index, choice) in choices">
-            <input type="radio" name="choice" id="choice + $index" :choice-id="choice.id" />
-            <label for="choice + $index">{{ choice.choice_text }}</label><br />
+        <div v-for="(choice, index) in choices">
+            <input type="radio" name="choice" id="choice + $index" />
+            <label for="choice + $index">{{ choice }}</label><br />
         </div>
         <input type="submit" value="Vote" />
         </form>
@@ -22,9 +22,10 @@ export default {
     },
     props : ['question'],
     created: function() {
-        axios.get('http://localhost:8000/polls/choices/'+this.question.id)
+        axios.get('http://localhost:8000/polls/'+this.question.id+'/choices/')
         .then((response) => {
-            this.choices = response.data
+            console.log(response);
+            this.choices = response.data.choices.map((choice) => choice);
         })
         .catch((err) => console.log(err));
     }
