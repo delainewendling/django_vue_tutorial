@@ -6,7 +6,8 @@ const questionMixin = {
         }
     },
     created: function(){
-        axios.get('http://localhost:8000/polls/questions')
+        axios.get('http://localhost:8000/polls/questions',
+        {withCredentials:true}, 'X-CSRFToken')
         .then((response) => {
             this.latest_question_list = response.data.map((question)=> {
                 return {

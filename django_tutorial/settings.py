@@ -15,6 +15,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+LOGIN_REDIRECT_URL = 'http://localhost:8081'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -64,8 +66,10 @@ REST_FRAMEWORK = {
     )
 }
 
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ORIGIN_WHITELIST = (
-    'localhost:8080',
+    '127.0.0.1:8081'
 )
 
 ROOT_URLCONF = 'django_tutorial.urls'
