@@ -29,7 +29,7 @@ class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.username')
-    choices = ChoiceSerializer(many=True)
+    # choices = ChoiceSerializer(many=True)
     class Meta:
         model = Question
-        fields = ('id', 'question_text', 'pub_date', 'choices')
+        fields = ('id', 'question_text', 'pub_date')
