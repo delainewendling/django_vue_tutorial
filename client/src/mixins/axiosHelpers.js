@@ -5,48 +5,16 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 const axiosHelpers = {
     getRequest(url) {
-        return new Promise (function (resolve, reject) {
-            axios.get(url, {withCredentials: true})
-            .then((response) => {
-                resolve(response);
-            })
-            .catch((err) => {
-                reject(err);
-            });
-        })
+        return axios.get(url, {withCredentials: true})
     },
     postRequest(url, data) {
-        return new Promise (function (resolve, reject) {
-            axios.post(url, data, {withCredentials: true})
-            .then((response) => {
-                resolve(response);
-            })
-            .catch((err) => {
-                reject(err);
-            });
-        })
+        return axios.post(url, data, {withCredentials: true})
     },
     deleteRequest(url) {
-        return new Promise (function (resolve, reject) {
-            axios.delete(url, {withCredentials: true})
-            .then((response) => {
-                resolve(response);
-            })
-            .catch((err) => {
-                reject(err);
-            });
-        })
+        return axios.delete(url, {withCredentials: true})
     },
     putRequest(url, data) {
-        return new Promise (function (resolve, reject) {
-            axios.put(url, data, {withCredentials: true})
-            .then((response) => {
-                resolve(response);
-            })
-            .catch((err) => {
-                reject(err);
-            });
-        })
+        return axios.put(url, data, {withCredentials: true})
     }
 }
 
