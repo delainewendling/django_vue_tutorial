@@ -22,7 +22,6 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="pull-right" v-bind:class="{active: route === '/login'}" @click="changeActive('/login')" v-if="!isAuthenticated"><a href="#/login">Login</a></li>
-                <li class="pull-right" v-bind:class="{active: route === '/register'}" @click="changeActive('/register')" v-if="!isAuthenticated"><a href="#/register">Register</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -34,24 +33,18 @@
 </template>
 
 <script>
-    import axios from 'axios';
-    import { mapGetters } from 'vuex';
-    export default {
-        data() {
-          return {
-            route: this.$route.path
-          }
-        },
-        methods: {
-            changeActive(route){
-                this.route = route
-            }
-        },
-        computed: {
-            ...mapGetters([
-                'isAuthenticated'
-            ])
+export default {
+    data() {
+      return {
+        route: this.$route.path,
+        isAuthenticated: this.$store.state.isAuthenticated
+      }
+    },
+    methods: {
+        changeActive(route){
+            this.route = route
         }
     }
+}
 </script>
 

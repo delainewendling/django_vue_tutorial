@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import {axiosHelpers} from '../mixins/axiosHelpers.js';
 export default {
     data(){
         return {
@@ -22,9 +22,8 @@ export default {
     },
     props : ['question'],
     created: function() {
-        axios.get('http://localhost:8000/polls/'+this.question.id+'/choices/')
+        axiosHelpers.getRequest('http://localhost:8000/polls/questions/'+this.question.id)
         .then((response) => {
-            console.log(response);
             this.choices = response.data.choices.map((choice) => choice);
         })
         .catch((err) => console.log(err));

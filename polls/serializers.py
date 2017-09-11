@@ -30,6 +30,18 @@ class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.username')
     # choices = ChoiceSerializer(many=True)
+    # choices = serializers.HyperlinkedRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     view_name='polls:choice-detail'
+    # )
+
+    choices = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='choice_text'
+    )
+
     class Meta:
         model = Question
-        fields = ('id', 'question_text', 'pub_date')
+        fields = ('id', 'question_text', 'pub_date', 'choices')

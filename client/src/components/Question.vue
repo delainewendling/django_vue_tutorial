@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import {axiosHelpers} from '../mixins/axiosHelpers.js';
 import PollDetail from './PollDetail.vue';
 export default {
     props: ['question', 'showEditControls'],
@@ -27,7 +27,7 @@ export default {
             question.expanded =!question.expanded;
          },
          deleteQuestion(question) {
-            axios.delete('http://localhost:8000/polls/questions/' + question.id)
+            axiosHelpers.deleteRequest('http://localhost:8000/polls/questions/' + question.id)
             .then((response) => {
                 this.$emit('delete', question.id);
             })
@@ -38,7 +38,7 @@ export default {
         },
         saveQuestionEdits(question) {
             question.editing = !question.editing;
-            axios.put('http://localhost:8000/polls/questions/' + question.id + "/", {
+            axiosHelpers.put('http://localhost:8000/polls/questions/' + question.id + "/", {
                 question_text: question.question_text
             })
             .then((response) => {

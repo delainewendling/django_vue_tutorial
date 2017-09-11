@@ -37,6 +37,14 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
 
+class ChoiceViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows choices to be viewed or edited.
+    """
+    queryset = Choice.objects.all()
+    serializer_class = ChoiceSerializer
+    # permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 class QuestionViewSet(viewsets.ModelViewSet):
     """
@@ -48,16 +56,6 @@ class QuestionViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     # def perform_create(self, serializer):
     #     serializer.save(owner=self.request.user)
-
-
-class ChoiceViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows choices to be viewed or edited.
-    """
-    queryset = Choice.objects.all()
-    serializer_class = ChoiceSerializer
-    # permission_classes = (permissions.AllowAny,)
-    permission_classes = (permissions.IsAuthenticated,)
 
 def get_choices(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
