@@ -7,28 +7,26 @@
 </template>
 
 <script>
-    import axios from 'axios';
-    import authMixin from '../mixins/auth.vue';
-    export default {
-        extends: authMixin,
-        data(){
-            return {
-                username: '',
-                password: ''
-            }
-        },
-        methods: {
-            login() {
-             axios.post('http://localhost:8000/polls/api-token-auth/', {
-                    username: this.username,
-                    password: this.password
-                })
-                .then((response) => {
-                    this.$store.commit('setUser', response.token)
-                    this.$router.push('/home');
-                })
-                .catch((err) => console.log(err));
-            }
+import axios from 'axios';
+export default {
+    data(){
+        return {
+            username: '',
+            password: ''
+        }
+    },
+    methods: {
+        login() {
+         axios.post('http://localhost:8000/polls/api-token-auth/', {
+                username: this.username,
+                password: this.password
+            })
+            .then((response) => {
+                this.$store.commit('setUser', response.token)
+                this.$router.push('/home');
+            })
+            .catch((err) => console.log(err));
         }
     }
+}
 </script>

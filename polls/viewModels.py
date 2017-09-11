@@ -44,8 +44,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
     """
     queryset = Question.objects.all().order_by('-pub_date')
     serializer_class = QuestionSerializer
-    permission_classes = (permissions.AllowAny,)
-
+    # permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     # def perform_create(self, serializer):
     #     serializer.save(owner=self.request.user)
 
@@ -56,16 +56,19 @@ class ChoiceViewSet(viewsets.ModelViewSet):
     """
     queryset = Choice.objects.all()
     serializer_class = ChoiceSerializer
-    permission_classes = (permissions.AllowAny,)
+    # permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
-    def retrieve(self, request, pk=None):
-        try:
-            question = Question.objects.get(id=pk)
-        except:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        queryset = Choice.objects.filter(question=question)
-        serializer = ChoiceSerializer(queryset, many=True, context={'request': request})
+def get_choices(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        choices = Choice.objects.filter(question=question)
+        serializer = ChoiceSerializer(choices, many=True)
+    except (KeyError, Choice.DoesNotExist):
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
         return Response(serializer.data)
+
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

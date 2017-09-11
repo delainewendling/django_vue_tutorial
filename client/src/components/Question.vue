@@ -1,5 +1,5 @@
 <template>
-    <div v-if="question.visible">
+    <div>
         <span v-if="!question.editing">{{ question.question_text }}</span>
         <input v-model="question.question_text" v-if="question.editing">
         <span v-if="!showEditControls">
@@ -29,7 +29,7 @@ export default {
          deleteQuestion(question) {
             axios.delete('http://localhost:8000/polls/questions/' + question.id)
             .then((response) => {
-                question.visible = false;
+                this.$emit('delete', question.id);
             })
             .catch((err) => console.log(err));
         },
