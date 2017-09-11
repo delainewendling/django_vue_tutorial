@@ -65,6 +65,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     )
 }
+
+APPEND_SLASH = False
+
 CORS_REPLACE_HTTPS_REFERER = True
 
 CORS_ALLOW_CREDENTIALS = True
