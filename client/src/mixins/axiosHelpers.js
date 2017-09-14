@@ -8,6 +8,7 @@ const axiosHelpers = {
         return axios.get(url, {withCredentials: true})
     },
     postRequest(url, data) {
+        console.log("url ", url, "question id ", data.question, " choice text", data.choice_text)
         return axios.post(url, data, {withCredentials: true})
     },
     deleteRequest(url) {

@@ -13,6 +13,8 @@ const questionMixin = {
                 return {
                     id: question.id,
                     expanded: false,
+                    addingQuestion: false,
+                    showChoices: false,
                     question_text: question.question_text
                 }
             });

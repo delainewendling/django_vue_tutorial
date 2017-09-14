@@ -18,7 +18,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, list_route, detail_route
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
@@ -43,8 +43,18 @@ class ChoiceViewSet(viewsets.ModelViewSet):
     """
     queryset = Choice.objects.all()
     serializer_class = ChoiceSerializer
-    # permission_classes = (permissions.AllowAny,)
     permission_classes = (permissions.IsAuthenticated,)
+    @list_route(url_path='(?P<question_id>[0-9]+)/get_choices')
+    def get_choices(self, request, question_id):
+        question = get_object_or_404(Question, pk=question_id)
+        try:
+            choices = Choice.objects.filter(question=question)
+            serializer = self.get_serializer(choices, many=True)
+        except (KeyError, Choice.DoesNotExist):
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.data)
+
 
 class QuestionViewSet(viewsets.ModelViewSet):
     """
@@ -52,20 +62,23 @@ class QuestionViewSet(viewsets.ModelViewSet):
     """
     queryset = Question.objects.all().order_by('-pub_date')
     serializer_class = QuestionSerializer
-    # permission_classes = (permissions.AllowAny,)
     permission_classes = (permissions.IsAuthenticated,)
     # def perform_create(self, serializer):
     #     serializer.save(owner=self.request.user)
-
-def get_choices(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        choices = Choice.objects.filter(question=question)
-        serializer = ChoiceSerializer(choices, many=True)
-    except (KeyError, Choice.DoesNotExist):
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    else:
-        return Response(serializer.data)
+    @detail_route(methods=['post'])
+    def add_choice(self, request, pk):
+        question = get_object_or_404(Question, pk=pk)
+        try:
+            choice = Choice.objects.create(
+                question=question,
+                choice_text=request.data['choice_text']
+            )
+            choice.save()
+            serializer = self.get_serializer(question, many=False)
+        except (KeyError, Choice.DoesNotExist):
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.data)
 
 
 def vote(request, question_id):

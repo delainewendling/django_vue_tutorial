@@ -3,9 +3,9 @@
         <form method="post">
         <div v-for="(choice, index) in choices">
             <input type="radio" name="choice" id="choice + $index" />
-            <label for="choice + $index">{{ choice }}</label><br />
+            <label for="choice + $index">{{ choice.choice_text }}</label><br />
         </div>
-        <input type="submit" value="Vote" />
+        <input type="submit" value="Vote"/>
         </form>
         <hr>
     </div>
@@ -22,9 +22,9 @@ export default {
     },
     props : ['question'],
     created: function() {
-        axiosHelpers.getRequest('http://localhost:8000/polls/questions/'+this.question.id)
+        axiosHelpers.getRequest('http://localhost:8000/polls/choices/'+this.question.id+'/get_choices')
         .then((response) => {
-            this.choices = response.data.choices.map((choice) => choice);
+            this.choices = response.data.map((choice) => choice);
         })
         .catch((err) => console.log(err));
     }
