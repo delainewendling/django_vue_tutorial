@@ -1,4 +1,5 @@
-import axios from 'axios';
+import {axiosHelpers} from '../mixins/axiosHelpers.js';
+
 const questionMixin = {
     data(){
         return {
@@ -6,12 +7,14 @@ const questionMixin = {
         }
     },
     created: function(){
-        axios.get('http://localhost:8000/polls/questions', { withCredentials: true })
+        axiosHelpers.getRequest('http://localhost:8000/polls/questions')
         .then((response) => {
             this.latest_question_list = response.data.map((question)=> {
                 return {
                     id: question.id,
                     expanded: false,
+                    addingQuestion: false,
+                    showChoices: false,
                     question_text: question.question_text
                 }
             });

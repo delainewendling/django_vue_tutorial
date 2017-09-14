@@ -5,13 +5,12 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'questions', viewModels.QuestionViewSet)
 router.register(r'choices', viewModels.ChoiceViewSet)
+router.register(r'questions', viewModels.QuestionViewSet)
 router.register(r'accounts', viewModels.UserViewSet)
 urlpatterns =[
     url(r'^', include(router.urls)),
-    url(r'^api-token-auth/', views.obtain_auth_token),
-    url(r'^(?P<question_id>[0-9]+)/choices/$', viewModels.get_choices, name="question_choice_set"),
+    url(r'^api-token-auth/', views.obtain_auth_token)
 ]
 
 app_name = 'polls'

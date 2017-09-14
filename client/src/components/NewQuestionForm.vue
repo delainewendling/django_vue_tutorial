@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {axiosHelpers} from '../mixins/axiosHelpers.js';
 export default {
     data(){
         return {
@@ -15,7 +15,7 @@ export default {
     },
     methods: {
         saveQuestion() {
-            axios.post('http://localhost:8000/polls/questions/', {
+            axiosHelpers.postRequest('http://localhost:8000/polls/questions/', {
                 question_text: this.question_text
             })
             .then((response) => {

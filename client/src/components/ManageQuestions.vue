@@ -26,6 +26,7 @@ export default {
                 id: data.id,
                 expanded: false,
                 editing: false,
+                chowChoices: false,
                 question_text: data.question_text
             }, ...this.latest_question_list];
         },
