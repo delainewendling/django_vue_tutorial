@@ -4,7 +4,7 @@ from . import viewModels
 from rest_framework import routers
 from rest_framework.authtoken import views
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'choices', viewModels.ChoiceViewSet)
 router.register(r'questions', viewModels.QuestionViewSet)
 router.register(r'accounts', viewModels.UserViewSet)
